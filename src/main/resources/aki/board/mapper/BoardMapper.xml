@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="aki.board.mapper.BoardMapper">
+
+<!-- CREATE -->
+<insert id="insert">
+	insert into tbl_board(bno, title, writer)
+		values(seq_board.nextval, #{title}, #{writer})
+</insert>
+
+
+<!-- READ -->
+
+
+<!-- UPDATE -->
+
+
+<!-- DELETE -->
+
+<!-- JOIN selectAll() -->
+<resultMap type="aki.board.domain.BoardVO" id="boardMap">
+	<id property="bno" column="bno"/>
+	<result property="bno" column="bno"/>
+	<result property="title" column="title"/>
+	<result property="writer" column="writer"/>
+	<result property="reg_date" column="reg_date"/>
+	<result property="update_date" column="update_date"/>
+	<collection property="productList" resultMap="productMap"/>
+</resultMap>
+
+<resultMap type="aki.board.domain.ProductVO" id="productMap">
+	<result property="pno" column="pno"/>
+	<result property="bno" column="bno"/>
+	<result property="p_name" column="p_name"/>
+	<result property="p_image" column="p_image"/>
+	<result property="p_size" column="p_size"/>
+	<result property="p_price" column="p_price"/>
+	<result property="p_amount" column="p_amount"/>
+	<result property="p_color" column="p_color"/>
+	<result property="gender" column="gender"/>
+	<result property="p_type" column="p_type"/>
+	<result property="p_wheather" column="p_wheather"/>
+	<result property="p_company" column="p_company"/>
+	<result property="p_create_date" column="p_create_date"/>
+</resultMap>
+
+
+
+<select id="selectAll" resultMap="boardMap">
+	select
+		*
+	from
+		tbl_board board LEFT OUTER JOIN tbl_product pro on board.bno = pro.bno
+	
+</select>
+<!-- end JOIN selectAll() -->
+
+</mapper>

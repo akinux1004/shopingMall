@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="aki.board.mapper.ProductMapper">
+
+<!-- CREAD -->
+
+<!-- READ -->
+<select id="read" resultType="aki.board.domain.ProductVO">
+	select * from tbl_product where bno = #{pno}
+</select>
+
+<!-- UPDATE -->
+<insert id="insert">
+	insert into tbl_product(pno, bno, p_name, p_image, p_size, p_price, p_amount, p_color
+								, gender, p_type, p_wheather, p_company, p_create_date)
+					values(seq_product.nextval, #{bno}, #{p_name}, #{p_image}, #{p_size}, #{p_price}, #{p_amount}, #{p_color}
+					  			,#{gender}, #{p_type}, #{p_wheather}, #{p_company}, #{p_create_date})			
+</insert>
+
+<!-- DELETE -->
+
+
+</mapper>
