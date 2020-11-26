@@ -21,8 +21,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="org.zerock.controller" />
-	<context:component-scan base-package="org.zerock.exception"/>
+	<context:component-scan base-package="aki.product.controller" />
+	<context:component-scan base-package="aki.product.exception"/>
 	
 	
 </beans:beans>
