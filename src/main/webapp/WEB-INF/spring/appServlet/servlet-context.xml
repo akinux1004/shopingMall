@@ -11,6 +11,9 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
+	<annotation-driven validator="validator"/>
+	
+
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
@@ -22,7 +25,10 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="aki.product.controller" />
+	<context:component-scan base-package="testController" />
 	<context:component-scan base-package="aki.product.exception"/>
+	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
 	
 	
 </beans:beans>

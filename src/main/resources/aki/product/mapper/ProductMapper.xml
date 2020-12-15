@@ -4,16 +4,114 @@
 
 <!-- CREATE -->
 <insert id="insert">
-	insert into tbl_product(pno, brand, title, content, price, thumbnail)
-		values(seq_product.nextval, #{brand}, #{title}, #{content}, #{price}, #{thumbnail})
+	insert into tbl_product(pno, brand, title, content, price)
+		values(seq_product.nextval, #{brand}, #{title}, #{content}, #{price})
+</insert>
+
+<insert id="insertSelectKey">
+	<selectKey keyProperty="pno" resultType="Long" order="BEFORE">
+		select seq_product.nextval from dual
+	</selectKey>
+	
+	insert into tbl_product(pno, brand, title, content, price)
+		values(#{pno}, #{brand}, #{title}, #{content}, #{price})
 </insert>
 
 
-<!-- READ -->
+<!-- READ 단일 레코드 by pno -->
+<select id="select" resultMap="productMap">
+	select 
+		a.*, b.*
+	from 
+		tbl_product a LEFT OUTER JOIN tbl_product_file b on a.pno = b. pno
+	
+	where 
+		a.pno = #{pno}
+</select>
 
-<select id="selectAll" resultType="aki.product.domain.ProductVO">
+<!-- READ -->
+<resultMap type="aki.product.domain.ProductVO" id="productMap">
+	<id property="pno" column="pno"/>
+	<result property="pno" column="pno"/>
+	<result property="rownum" column="rownum"/>
+	<result property="brand" column="brand"/>
+	<result property="title" column="title"/>
+	<result property="content" column="content"/>
+	<result property="price" column="price"/>
+	<result property="reg_date" column="reg_date"/>
+	<result property="update_date" column="update_date"/>
+	<collection property="productFileList" resultMap="productFileMap"/>
+</resultMap>
+
+<resultMap type="aki.product.domain.ProductFileDTO" id="productFileMap">
+	<result property="pno" column="pno"/>
+	<result property="upload_path" column="upload_path"/>
+	<result property="uuid" column="uuid"/>
+	<result property="file_name" column="file_name"/>
+	<result property="image" column="image"/>
+	<result property="main" column="main"/>
+	<result property="fileCallPath" column="filecallpath"/>
+</resultMap>
+
+
+<select id="selectAll" resultMap="productMap">
 <![CDATA[		
-	SELECT  
+	select
+		rownum, a.*, b.* 
+	from
+		(
+		select * from TBL_PRODUCT 
+		)	
+
+			a 
+		
+		LEFT OUTER JOIN 
+		
+		(
+		select 
+			*
+		from tbl_product_file
+		
+		
+		)
+			b 
+		
+		on 
+			a.pno = b.pno	
+		
+	where 
+		rownum > 0
+	order by 
+		a.pno desc	
+
+]]>	
+</select>
+
+
+<!-- UPDATE -->
+
+<update id="update">
+	update tbl_product
+	set
+	brand = #{brand},
+	title = #{title},
+	content = #{content},
+	price = #{price},
+	update_date = sysdate
+	where pno = #{pno}
+</update>
+
+<!-- DELETE -->
+
+<delete id="delete">
+	delete from tbl_product where pno = #{pno}
+</delete>
+
+
+<!-- 아래 이전에 사용하던것 -->
+
+<!-- 그냥 단순히 12번째 리스트 까지만 뽑는것 
+SELECT  
 		*
 	FROM 
 		(
@@ -24,15 +122,12 @@
 		)
 	WHERE 
 		ROWNUM <= 12
-
-]]>		
-</select>
-
-
-<!-- UPDATE -->
+		
+	
+ -->	
 
 
-<!-- DELETE -->
+
 
 <!-- JOIN selectAll() 
 <resultMap type="aki.board.domain.BoardVO" id="boardMap">

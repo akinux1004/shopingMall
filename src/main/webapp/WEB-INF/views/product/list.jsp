@@ -1,60 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.net.URLDecoder" %>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-     
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Shop Homepage - Start Bootstrap Template</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="/resources/vendor/bootstrap/css/bootstrap.min.css?ver=1" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="/resources/css/shop-homepage.css?ver=1" rel="stylesheet">
-  
-  
-
-</head>
-
-<body>
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Start Bootstrap</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<%@ include file="../includes/header.jsp" %>
 
   <!-- Page Content -->
   <div class="container text-warning">
@@ -63,7 +14,7 @@
 
       <div class="col-lg-3">
 
-        <h1 class="my-4">Shop Name</h1>
+        <h1 class="my-4">GooSinSa.COM</h1>
         <div class="list-group">
           <a href="#" class="list-group-item">Category 1</a>
           <a href="#" class="list-group-item">Category 2</a>
@@ -74,60 +25,103 @@
       <!-- /.col-lg-3 -->
 
       <div class="col-lg-9">
-
-        <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
-              <img class="d-block img-fluid" src="/resources/img/test1.jpg" alt="First slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
-            </div>
-          </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
+    
+    
+<div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner" role="listbox">
+    <div class="carousel-item active">
+      <img class="d-block img-fluid homeImage" src="/resources/img/test.jpg" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block img-fluid" src="/resources/img/나이키메인.png" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block img-fluid" src="/resources/img/bts.jpg" alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 
 	        
 <!-- page -->
     <div class="row"> 
-    
+      
 
 <c:forEach items="${list }" var="list" varStatus="status">
-	<div class="col-lg-4 col-md-6 mb-4">
+  	
+	<div class="col-lg-4 col-md-6 mb-4" name="getMove">
      <div class="card h-100">
-       <a href="#"><img class="card-img-top" src="/resources/img/test1.jpg" alt=""></a>
+       <a class="move" href="${list.pno }">
+       	 	<!-- <img class="card-img-top embed-responsive-item" 
+       			src="/display?fileName=${fileList.fileCallPath }" alt=""/> -->
+       		<div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+			  <ol class="carousel-indicators">
+			    <c:forEach items="${list.productFileList }" var="fileList" varStatus="status">
+				    <c:choose>
+			    		<c:when test="${status.index == 0}">
+			    			<li data-target="#carouselExampleIndicators" data-slide-to="${status.index }" class="active"></li>
+			    		</c:when>
+			    		<c:otherwise>
+			    			<li data-target="#carouselExampleIndicators" data-slide-to="${status.index }"></li>
+			    		</c:otherwise>
+			    	</c:choose>
+				</c:forEach>
+			  </ol>
+			  <div class="carousel-inner" role="listbox">
+			   <c:forEach items="${list.productFileList }" var="fileList" varStatus="status">
+			    	<c:choose>
+			    		<c:when test="${status.index == 0 }">
+			    			<div class="carousel-item active">
+			    				<div class="embed-responsive embed-responsive-4by3">
+			      					<img class="d-block img-fluid embed-responsive-item" src="/display?fileName=${fileList.fileCallPath }" alt="First slide">
+			    				</div>
+			    			</div>
+			    		</c:when>
+			    		<c:otherwise>
+			    			<div class="carousel-item">
+			    				<div class="embed-responsive embed-responsive-4by3">
+			      					<img class="d-block img-fluid embed-responsive-item" src="/display?fileName=${fileList.fileCallPath }" alt="Second slide">
+			    				</div>
+			    			</div>		
+			    		</c:otherwise>
+			    	</c:choose>
+			   	</c:forEach>
+			  </div>
+			</div>
+		</a>
        <div class="card-body">
-         <h4 class="card-title">
+         <h4 class="card-title" style="height:30%" >
          <a href="#"><c:out value="${list.title }"/></a>  
          </h4>
- 		<h5>
-           <fmt:formatNumber value="${list.price }" type="number" pattern="$#,###.##"/>		
-         </h5>
-         <p class="card-text">${list.content }</p>
-         <p>${list.brand }</p>
+ 		
+        <p class="card-text" style="height:30%; margin-top:10%">${list.content }</p>
+        <fmt:formatNumber value="${list.price }" type="number" pattern="$#,###.##"/>
+        
        </div>
        <div class="card-footer">
+       		<p>${list.brand }</p>	
+            <p>Pno : ${list.pno }</p>
          <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
        </div>
      </div>
     </div>
-		
-</c:forEach>
+</c:forEach>		
+
+
+
+
         
         
 <%-- <c:forEach items="${list }" var="list" varStatus="status">
@@ -186,6 +180,49 @@
 </body>
 
 </html>
+
+<!-- jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<script>
+$(document).ready(function(){
+	
+	var result = '<c:out value="${result}"/>';
+
+	//get 페이지로의 호출  a tag 이벤트 처리
+	$("div[name='getMove']").on("click", function(e){
+		e.preventDefault();
+		
+		var pno = $(this).find("a[class='move']").attr("href");
+		
+		console.log(pno);
+		var uri = "/product/get?pno=" + pno;
+		
+		$(location).attr('href',uri);
+	});
+	
+	checkModal(result);
+		
+});
+</script>
+
+<script>
+function checkModal(result){
+	if(result === '' || hosroty.state){
+		return;
+	}
+	
+	if(parseInt(result) > 0){
+		alert(result);
+	}
+	
+	
+	alert(result);
+	
+}
+</script>
+
 
 
 

@@ -189,7 +189,8 @@ figure {
 
 img {
 	vertical-align: middle;
-	border-style: none
+	border-style: none;
+	
 }
 
 svg {
@@ -4715,7 +4716,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 	flex-direction: column;
 	min-width: 0;
 	word-wrap: break-word;
-	background-color: gray;
+	background-color: darkslategrey;
 	background-clip: border-box;
 	border: 1px solid rgba(0, 0, 0, .125);
 	border-radius: .25rem

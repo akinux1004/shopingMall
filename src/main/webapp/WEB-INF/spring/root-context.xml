@@ -32,5 +32,19 @@
 	
 	<mybatis-spring:scan base-package="aki.product.mapper"/>
 	<context:component-scan base-package="aki.product.service" />
-		
+	
+	<!-- validation -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="validationMessageSource" ref="messageSource" />
+	</bean>
+	
+	<!-- messageSource 쓰지도 않는데 경고문 떠서 붙여놈 -->
+	<bean name="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basename">
+    	<!-- resources/resourcebundles/messages_ko 아래 값 그대로 경로와 파일 일치 하여야 함 -->
+        <value>resources/resourcebundles/messages_ko.properties</value>
+    </property>
+    
+</bean>
+	
 </beans>

@@ -12,3 +12,12 @@ body {
 .card-title a {
 	color: #e7ead9;
 }
+
+.homeImage {
+	display: block; 
+	margin: 0px auto;
+}
+
+
+
+
